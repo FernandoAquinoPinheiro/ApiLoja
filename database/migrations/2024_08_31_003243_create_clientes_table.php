@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id("codigoCliente");
             $table->string("nomeCliente");
             $table->date("nascCliente");
-            $table->intereger("TelefoneCliente");
+            $table->string("TelefoneCliente");
 
             $table->timestamps();
         });
