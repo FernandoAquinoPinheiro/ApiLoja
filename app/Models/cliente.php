@@ -14,4 +14,9 @@ class cliente extends Model
         'nascCliente',
         'TelefoneCliente',
     ];
+
+    //  public function cliente()
+    //  {
+    //      return $this->hasMany(cliente::class, 'codigoClientefk', 'codigoCliente');
+    //  }
 }

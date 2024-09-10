@@ -12,7 +12,7 @@ use App\Models\produto;
 class ProdutoController extends Controller
 {
     public function index(){
-        $registroProduto = tbProdutos::All(); // $QUERY = "Select * From tbProduto;"
+        $registroProduto = produto::All(); // $QUERY = "Select * From tbProduto;"
         $contador = $registroProduto ->count();
 
         return 'Produtos: '.$contador.$registroProduto.Response()->json([],Response::HTTP_NO_CONTENT);
@@ -25,7 +25,7 @@ class ProdutoController extends Controller
 
     public function show(string $id) //Função com parametro id
     {
-        $registroProduto = tbProdutos::find($id); 
+        $registroProduto = produto::find($id); 
 
         if($registroProduto)//retorna o Produto localizado
         {
@@ -49,7 +49,7 @@ class ProdutoController extends Controller
 
         $registroVerifica = Validator::make($registroProduto,[
 
-            'codigo'=> 'required',
+          
             'tipoProduto'=> 'required',
             'valorProduto'=> 'required',
             'codigoClientefk'=> 'required'
@@ -63,7 +63,7 @@ class ProdutoController extends Controller
              
             }
 
-            $registroProdutoCad = tbProdutos::create($registroProduto);
+            $registroProdutoCad = produto::create($registroProduto);
 
             if($registroProdutoCad)//retorna o Produto localizado
             {
@@ -84,7 +84,7 @@ class ProdutoController extends Controller
         $registroProduto = $request->All();
 
         $registroVerifica = Validator::make($registroProduto,[
-            'codigo'=> 'required',
+          
             'tipoProduto'=> 'required',
             'valorProduto'=> 'required',
             'codigoClientefk'=> 'required'
@@ -96,13 +96,13 @@ class ProdutoController extends Controller
          }
 
 
-         $registroBanco = tbProdutos::Find($id);
-         $registroBanco->codigo = $registroProduto['codigo'];
+         $registroBanco = produto::Find($id);
+       
          $registroBanco->tipoProduto  = $registroProduto['tipoProduto'];
          $registroBanco->valorProduto =$registroProduto['valorProduto'];
          $registroBanco->codigoClientefk =$registroProduto['codigoClientefk'];
 
-         $registroBanco->save();
+        $retorno = $registroBanco->save();
 
          if($retorno){
             return "Produto atualizado com suscesso.".Response()->json([],Response::HTTP_NO_CONTENT);
@@ -119,7 +119,7 @@ class ProdutoController extends Controller
     //crud -> deletar(
     public function destroy(string $id){
 
-        $registroProduto = tbProdutos::find($id) ;
+        $registroProduto = produto::find($id) ;
 
         if($registroProduto->delete()){
             
